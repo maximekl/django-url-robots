@@ -1,5 +1,5 @@
 =========================
-django-url-robots
+django2-url-robots
 =========================
 
 ``Django`` ``robots.txt`` generator. Based on using decorated ``django.conf.urls.url``.
@@ -12,13 +12,13 @@ The recommended way to install django-url-robots is with `pip <http://pypi.pytho
 
 1. Install from PyPI with ``easy_install`` or ``pip``::
 
-    pip install django-url-robots
+    pip install django2-url-robots
 
-2. Add ``'url_robots'`` to your ``INSTALLED_APPS``::
+2. Add ``'django2_url_robots'`` to your ``INSTALLED_APPS``::
 
     INSTALLED_APPS = (
         ...
-        'url_robots',
+        'django2_url_robots',
         ...
         )
 
@@ -28,15 +28,15 @@ The recommended way to install django-url-robots is with `pip <http://pypi.pytho
         url(r'^robots\.txt$', url_robots.views.robots_txt),
         ]
 
-4. Describe rules by boolean keyword argument ``robots_allow`` using for it ``url_robots.utils.url`` instead ``django.conf.urls.url``::
+4. Describe rules by boolean keyword argument ``robots_allow`` using for it ``django2_url_robots.utils.url`` instead ``django.conf.urls.url``::
 
-    from url_robots.utils import url
+    from django2_url_robots.utils import url
     
     urlpatterns += [
        url('^profile/private$', views.some_view, robots_allow=False),
        ]
  
-``django-url-robots`` tested with ``Django-1.8+``. Encodes unicode characters by percent-encoding.
+``django2-url-robots`` tested with ``Django-1.8+``. Encodes unicode characters by percent-encoding.
 
 Settings
 ====================
@@ -44,7 +44,7 @@ Settings
 In this moment there are only one option to define template of ``robots.txt`` file::
 
     urlpatterns += [
-        url(r'^robots\.txt$', url_robots.views.robots_txt, {'template': 'my_awesome_robots_template.txt'}),
+        url(r'^robots\.txt$', django2_url_robots.views.robots_txt, {'template': 'my_awesome_robots_template.txt'}),
         ]
 
 Example
@@ -60,12 +60,12 @@ urls.py::
     from django.conf.urls import include
 
     urlpatterns = [
-        url(r'^profile', include('url_robots.tests.urls_profile')),
+        url(r'^profile', include('django2_url_robots.tests.urls_profile')),
     ]
 
 urls_profile.py::
 
-    from url_robots.utils import url
+    from django2_url_robots.utils import url
 
     urlpatterns = [
         url(r'^s$', views.some_view, name='profiles', robots_allow=True),
