@@ -11,7 +11,12 @@ except ImportError:
     from urllib import quote, unquote
 
 from django.conf.urls import url
-from django.core.urlresolvers import get_urlconf, get_resolver, RegexURLResolver
+
+try:
+    from django.core.urlresolvers import get_urlconf, get_resolver, RegexURLResolver
+except ImportError:
+    from django.urls import get_urlconf, get_resolver
+    from django.urls import URLResolver as RegexURLResolver
 
 
 def robots_decorator(url_function):
@@ -49,8 +54,10 @@ def create_rule_list(parent_resolver, abs_pattern):
     rule_list = []
 
     for resolver in parent_resolver.url_patterns:
-        pattern = join_patterns(abs_pattern, resolver.regex.pattern)
-
+        try:
+            pattern = join_patterns(abs_pattern, resolver.regex.pattern)
+        except AttributeError:
+            pattern = join_patterns(abs_pattern, resolver.pattern)
         rule = ''
         robots_allow = getattr(resolver, 'robots_allow', None)
 
@@ -66,8 +73,12 @@ def create_rule_list(parent_resolver, abs_pattern):
             rule += path
             rule_list.append(rule)
 
-        if isinstance(resolver, RegexURLResolver):
-            rule_list += create_rule_list(resolver, pattern)
+        try:
+            if isinstance(resolver, RegexURLResolver):
+                rule_list += create_rule_list(resolver, pattern)
+        except:
+            if isinstance(resolver, URLResolver):
+                rule_list += create_rule_list(resolver, pattern)
 
     return rule_list
 
@@ -78,12 +89,16 @@ def join_patterns(pattern1, pattern2):
     """
     if pattern1.endswith('$'):
         return pattern1
-
-    if pattern2.startswith('^'):
-        return pattern1 + pattern2[1:]
-
-    if pattern2:
-        return pattern1 + '.' + pattern2
+    try:
+        if pattern2.startswith('^'):
+            return pattern1 + pattern2[1:]
+        if pattern2:
+            return pattern1 + '.' + pattern2
+    except AttributeError:
+        if str(pattern2).startswith('^'):
+            return pattern1 + str(pattern2)[1:]
+        if pattern2:
+            return pattern1 + '.' + str(pattern2)
 
     return pattern1
 
