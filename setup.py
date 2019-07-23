@@ -3,16 +3,16 @@ from setuptools import setup
 long_description = open('README.rst').read()
 
 setup(
-    name='django-url-robots',
-    version='2.0',
+    name='django2-url-robots',
+    version='3.1',
     description='Django robots.txt generator',
     long_description=long_description,
-    url='http://github.com/dimka665/django-url-robots',
-    author='Dmitry Voronin',
-    author_email='dimka665@gmail.com',
+    url='https://github.com/maximekl/django2-url-robots',
+    author='Maxime Klampas',
+    author_email='mklampas@gmail.com',
     license='Python Software Foundation License',
-    packages=['url_robots', 'url_robots.tests'],
-    package_data={'url_robots': ['templates/*.*']},
+    packages=['django2_url_robots', 'django2_url_robots.tests'],
+    package_data={'django2_url_robots': ['templates/*.*']},
     platforms=["any"],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

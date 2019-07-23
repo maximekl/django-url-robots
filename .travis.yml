@@ -1,5 +1,7 @@
 language: python
 python:
+    - "3.7"
+    - "3.6"
     - "3.5"
     - "3.4"
     - "2.7"
@@ -8,6 +10,10 @@ env:
     - TOX_ENV=django19
     - TOX_ENV=django18
     - TOX_ENV=django110
+    - TOX_ENV=django11
+    - TOX_ENV=django20
+    - TOX_ENV=django21
+    - TOX_ENV=django22
     - TOX_ENV=djangomaster
 matrix:
     fast_finish: true

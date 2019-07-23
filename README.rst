@@ -2,13 +2,15 @@
 django2-url-robots
 =========================
 
+Fork of dimka665 https://github.com/dimka665/django-url-robots
+
 ``Django`` ``robots.txt`` generator. Based on using decorated ``django.conf.urls.url``.
 It gets ``urlpatterns`` and replaces ambiguous parts by ``*``.
 
 Installation & Usage
 =========================
 
-The recommended way to install django-url-robots is with `pip <http://pypi.python.org/pypi/pip>`_
+The recommended way to install django2-url-robots is with `pip <http://pypi.python.org/pypi/pip>`_
 
 1. Install from PyPI with ``easy_install`` or ``pip``::
 
@@ -22,21 +24,21 @@ The recommended way to install django-url-robots is with `pip <http://pypi.pytho
         ...
         )
 
-3. Add url_robots view to your root URLconf::
+3. Add django2_url_robots view to your root URLconf::
 
     urlpatterns += [
-        url(r'^robots\.txt$', url_robots.views.robots_txt),
+        url(r'^robots\.txt$', django2_url_robots.views.robots_txt),
         ]
 
 4. Describe rules by boolean keyword argument ``robots_allow`` using for it ``django2_url_robots.utils.url`` instead ``django.conf.urls.url``::
 
     from django2_url_robots.utils import url
-    
+
     urlpatterns += [
        url('^profile/private$', views.some_view, robots_allow=False),
        ]
- 
-``django2-url-robots`` tested with ``Django-1.8+``. Encodes unicode characters by percent-encoding.
+
+``django2-url-robots`` tested with ``Django-2.0.5+``. Encodes unicode characters by percent-encoding.
 
 Settings
 ====================
