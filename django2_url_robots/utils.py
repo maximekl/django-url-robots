@@ -1,6 +1,5 @@
-
 import sre_parse
-from sre_constants import LITERAL, AT, AT_BEGINNING, AT_END
+from sre_constants import LITERAL, AT, AT_END
 
 try:
     # Python 3
@@ -16,7 +15,7 @@ try:
     from django.core.urlresolvers import get_urlconf, get_resolver, RegexURLResolver
 except ImportError:
     from django.urls import get_urlconf, get_resolver
-    from django.urls import URLResolver as RegexURLResolver
+    from django.urls import URLResolver
 
 
 def robots_decorator(url_function):
@@ -30,6 +29,7 @@ def robots_decorator(url_function):
         return resolver_or_pattern
 
     return url_extended
+
 
 url = robots_decorator(url)
 
