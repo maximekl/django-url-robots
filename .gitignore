@@ -4,3 +4,9 @@
 *.pyc
 
 .tox/
+
+build/*
+
+dist/*
+
+env/*
